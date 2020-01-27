@@ -104,6 +104,7 @@ if module == "DownloadWait":
             list_of_files = glob.glob(path_)
             if len(list_of_files) > 0:
                 latest_file = max(list_of_files, key=os.path.getctime)
+                latest_file = latest_file.replace('\\', '/')
                 print(r'' + latest_file, end="")
             else:
                 print("Sin archivos", end="")
