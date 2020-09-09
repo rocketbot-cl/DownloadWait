@@ -24,7 +24,7 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 
 """
 
-import time
+from time import sleep
 import os
 import glob
 
@@ -47,7 +47,7 @@ def download_wait(cont, directory, timeout, nfiles=None):
     dl_wait = True
 
     while dl_wait and seconds < timeout:
-        time.sleep(1)
+        sleep(1)
         dl_wait = False
         files = os.listdir(directory)
         if nfiles and len(files) != nfiles:
