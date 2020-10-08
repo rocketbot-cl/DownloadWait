@@ -25,8 +25,12 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 """
 
 from time import sleep
+ProcessTime = time.perf_counter  # this returns nearly 0 when first call it if python version <= 3.6
+ProcessTime()
 import os
 import glob
+global sleep
+global ProcessTime
 
 
 def download_wait(cont, directory, timeout, nfiles=None):
@@ -43,10 +47,13 @@ def download_wait(cont, directory, timeout, nfiles=None):
         If provided, also wait for the expected number of files.
 
     """
+
     seconds = 0
     dl_wait = True
 
-    while dl_wait and seconds < timeout:
+    start = ProcessTime()
+    process_time = ProcessTime()
+    while dl_wait and process_time - start < timeout:
         sleep(1)
         dl_wait = False
         files = os.listdir(directory)
@@ -57,7 +64,7 @@ def download_wait(cont, directory, timeout, nfiles=None):
             if fname.endswith('.crdownload') or fname.endswith('.part'):
                 dl_wait = True
 
-        seconds += 1
+        process_time = ProcessTime()
     fin = os.listdir(directory)
     fin = len(fin)
 
