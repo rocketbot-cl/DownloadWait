@@ -25,12 +25,13 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 """
 
 from time import sleep
+import time
+global ProcessTime
 ProcessTime = time.perf_counter  # this returns nearly 0 when first call it if python version <= 3.6
 ProcessTime()
 import os
 import glob
 global sleep
-global ProcessTime
 
 
 def download_wait(cont, directory, timeout, nfiles=None):
