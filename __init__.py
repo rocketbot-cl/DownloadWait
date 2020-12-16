@@ -54,15 +54,17 @@ def download_wait(cont, directory, timeout, nfiles=None):
 
     start = ProcessTime()
     process_time = ProcessTime()
-    while dl_wait and process_time - start < timeout:
+    while dl_wait and seconds < timeout:
         sleep(1)
+        seconds = process_time - start
         dl_wait = False
         files = os.listdir(directory)
-        if nfiles and len(files) != nfiles:
+        if len(files) <= cont:
             dl_wait = True
 
         for fname in files:
             if fname.endswith('.crdownload') or fname.endswith('.part'):
+                print(fname)
                 dl_wait = True
 
         process_time = ProcessTime()
@@ -72,6 +74,7 @@ def download_wait(cont, directory, timeout, nfiles=None):
     # return bool and seconds
     print('Ini',cont)
     print('Fin: ', fin)
+    print('Time', seconds)
     if cont == fin:
         return False,seconds
     else:
@@ -105,10 +108,10 @@ if module == "DownloadWait":
     if path_ and time_:
 
         try:
-            res_,sec_ = download_wait(cont_,path_, int(time_))
+            res_,sec_ = download_wait(cont_, path_, int(time_))
 
             path_ = os.path.join(path_,'*')
-            #print('path!!!',path_)
+            #print('path!!!',path_)0
             list_of_files = glob.glob(path_)
             if len(list_of_files) > 0:
                 latest_file = max(list_of_files, key=os.path.getctime)
@@ -120,7 +123,7 @@ if module == "DownloadWait":
             SetVar(var2_,res_)
             SetVar(var_,sec_)
             SetVar(var3_,latest_file if res_ else '')
-
+            sleep(1)
         except Exception as e:
             PrintException()
             raise (e)
