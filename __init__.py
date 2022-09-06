@@ -63,7 +63,7 @@ def download_wait(cont, directory, timeout, nfiles=None):
             dl_wait = True
 
         for fname in files:
-            if fname.endswith('.crdownload') or fname.endswith('.part'):
+            if fname.endswith(('.crdownload','.part','.tmp')):
                 print(fname)
                 dl_wait = True
 
