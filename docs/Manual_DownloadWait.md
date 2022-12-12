@@ -1,3 +1,3 @@
 ## DownloadWait
 
- view the documentation at: https://github.com/rocketbot-cl/SAPB1/blob/master/example/Manual_DownloadWait.pdf
+ view the documentation at: https://github.com/rocketbot-cl/DownloadWait/blob/master/example/Manual_DownloadWait.pdf
